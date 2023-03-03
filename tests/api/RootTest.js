@@ -12,6 +12,6 @@ describe('Root', () => {
     const response = await request('http://localhost:8080').get('/');
 
     expect(response.status).to.equal(200);
-    expect(response.text).to.deep.equal('This is Treash and Treasure');
+    expect(response.text).to.deep.equal('"This is Treash and Treasure"');
   });
 });
