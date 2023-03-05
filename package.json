@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "set NODE_ENV=dev && tsc && node ./build/src/app.js",
-    "test": "set NODE_ENV=test && mocha ./tests/**/*.js --timeout 10000",
+    "test": "mocha ./tests/**/*.js --timeout 10000",
+    "api-test": "mocha ./tests/api/**/*.js --timeout 10000",
+    "unit-test": "mocha ./tests/unit/**/*.js --timeout 10000",
     "dev": "set NODE_ENV=dev && concurrently \"npx tsc --watch\" \"nodemon -q build/src/app.js\"",
     "lint": "gts lint",
     "clean": "gts clean",
