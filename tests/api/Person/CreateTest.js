@@ -10,7 +10,7 @@ const {request} = chai;
 describe('PersonAPI', () => {
   it('should create a person', async () => {
     const person = {
-      login: 'john.doe',
+      username: 'john_doe',
       name: 'John Doe',
       email: 'johndoe@gmail.com',
     };

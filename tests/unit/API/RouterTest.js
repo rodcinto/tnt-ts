@@ -1,5 +1,4 @@
 const {describe, it, beforeEach} = require('mocha');
-const chai = require('chai');
 const sinon = require('sinon');
 const express = require('express');
 
