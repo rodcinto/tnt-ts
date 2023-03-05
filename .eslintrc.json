@@ -7,8 +7,10 @@
         "allowModules": [
           "mocha",
           "chai",
-          "chai-http"
+          "chai-http",
+          "sinon"
         ],
+        "convertPath": null,
         "tryExtensions": [
           ".js",
           ".json",
