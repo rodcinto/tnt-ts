@@ -3,7 +3,8 @@ import npmlog from 'npmlog';
 import mongoose, {Connection, Schema} from 'mongoose';
 import config from 'config';
 
-import Server from './Server';
+import Server from './API/Server';
+import Router from './API/Router';
 
 // Connect to MongoDB
 mongoose.connect(config.get('DBHost'), {
@@ -31,10 +32,7 @@ const personSchema = new Schema<PersonInterface>({
 });
 const PersonModel = mongoose.model<PersonInterface>('Person', personSchema);
 
-// API Root
-app.get('/', (req: Request, res: Response) => {
-  res.json({message: 'This is Treash and Treasure'});
-});
+Router.assignRoutes(app);
 
 // Create a new person
 app.post('/person', async (req: Request, res: Response) => {
