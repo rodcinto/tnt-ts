@@ -1,0 +1,22 @@
+services:
+  nosql:
+    image: mongo
+    restart: always
+    volumes:
+      - ./docker/database:/data/db
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: treasure
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: treasure
+      ME_CONFIG_MONGODB_URL: mongodb://root:treasure@nosql:27017/
+
