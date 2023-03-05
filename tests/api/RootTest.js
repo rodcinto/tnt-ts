@@ -7,11 +7,13 @@ use(chaiHttp);
 
 const {request} = chai;
 
-describe('Root', () => {
+describe('RootAPI', () => {
   it('should see the API root', async () => {
     const response = await request('http://localhost:8080').get('/');
+    const jsonBody = JSON.parse(response.text);
 
     expect(response.status).to.equal(200);
-    expect(response.text).to.deep.equal('"This is Treash and Treasure"');
+    expect(response.type).to.equal('application/json');
+    expect(typeof jsonBody.message).to.equal('string');
   });
 });
