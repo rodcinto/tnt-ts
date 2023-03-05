@@ -7,7 +7,7 @@ use(chaiHttp);
 
 const {request} = chai;
 
-describe('PersonAPI', () => {
+describe('Create Person API', () => {
   it('should create a person', async () => {
     const person = {
       username: 'john_doe',

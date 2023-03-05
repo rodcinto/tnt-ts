@@ -1,9 +1,12 @@
 import {Express, Request, Response} from 'express';
 import NewPersonSignsUp from '../Person/Command/NewPersonSignsUp';
+import FindOnePerson from '../Person/Query/FindOnePerson';
+import npmlog from 'npmlog';
 
 class Router {
   static readonly ROOT = '/';
   static readonly PERSON = '/person';
+  static readonly PERSON_USERNAME = '/person/:username';
 
   static assignRoutes(app: Express) {
     // API Root
@@ -28,14 +31,26 @@ class Router {
       }
 
       try {
-        command.execute();
+        command.executeCommand();
         res.sendStatus(201);
       } catch (err) {
         res.status(500).send({
           message: 'An internal error occurred'
         });
       }
-  });
+    });
+    app.route(this.PERSON_USERNAME).get((req: Request, res: Response) => {
+      const findOnePerson = new FindOnePerson(req.params.username);
+      findOnePerson.executeQuery().then((result) => {
+        res.json({
+          person: result
+        });
+      }).catch((err: any) => {
+        res.status(404).send({
+          message: `Person with username ${req.params.username} not found`,
+        });
+      });
+    });
   }
 }
 

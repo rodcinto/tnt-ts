@@ -16,7 +16,7 @@ class NewPersonSignsUp implements CommandInterface {
     this.person = new Person(name, username, email);
   }
 
-  public execute(): void {
+  public executeCommand(): void {
     this.person.create();
   }
 }

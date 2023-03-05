@@ -2,6 +2,7 @@ import PersonModel from "../Infrastructure/Database/PersonModel";
 import StaticModelFactory from "../Infrastructure/Database/StaticModelFactory";
 import Email from "./Email";
 import PersonInterface from "./PersonInterface";
+import UsernameSanitizer from "./UsernameSanitizer";
 
 class Person implements PersonInterface {
   readonly MIN_NAME_LENGTH: number = 3;
@@ -69,7 +70,7 @@ class Person implements PersonInterface {
   }
 
   private sanitizeUsername(username: string): string {
-    return username.trim().toLowerCase();
+    return UsernameSanitizer.sanitize(username);
   }
 }
 
