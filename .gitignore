@@ -105,3 +105,11 @@ dist
 .tern-port
 
 .editorconfig
+
+# config files
+config/dev.json
+config/test.json
+
+
+# docker
+docker/*

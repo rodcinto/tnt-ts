@@ -1,0 +1,6 @@
+{
+  "DBHost": "mongodb://localhost:27017",
+  "DBName": "tnt-test",
+  "DBUser": "root",
+  "DBPass": "treasure"
+}
