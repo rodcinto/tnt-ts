@@ -38,13 +38,12 @@ class PersonModel {
     return this.personModel;
   }
 
-  public saveNew(
+  public async saveNew(
     name: string,
     username: string,
     email: string
-  ): void {
-    try {
-      this.getPersonModel().create({
+  ):  Promise<string> {
+    return await this.getPersonModel().create({
         name: name,
         username: username,
         email: email,
@@ -52,22 +51,19 @@ class PersonModel {
         return person.save();
       }).then((savedPerson) => {
         this.logger.info('server', 'Person created:', savedPerson);
+        return savedPerson.id.toString();
       }).catch((err) => {
         this.logger.error('error', 'Error creating person:', err);
       });
-    } catch (err: any) {
-      this.logger.error('error', 'ERROR CREATING PERSON:', err);
-      throw err;
-    }
   }
 
   public async findByUsername(username: string): Promise<PersonPropertiesInterface | null> {
-    try {
-      return await this.getPersonModel().findOne({ username: username });
-    } catch (err) {
-      this.logger.error('error', 'Error finding person:', err);
-      throw err;
-    }
+    return await this.getPersonModel().
+      findOne({ username: username })
+      .catch((err: Error) => {
+        this.logger.error('error', 'Error finding person:', err);
+        throw err;
+      });
   }
 }
 

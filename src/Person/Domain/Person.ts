@@ -11,6 +11,7 @@ class Person implements PersonInterface {
   readonly MAX_USERNAME_LENGTH: number = 25;
   readonly USERNAME_REGEX: RegExp = /^[a-zA-Z0-9_]+$/;
 
+  id: string | undefined;
   name: string;
   username: string;
   email: Email;
@@ -25,6 +26,10 @@ class Person implements PersonInterface {
     this.email = email;
   }
 
+  public getId(): string | undefined {
+    return this.id;
+  }
+
   public getName(): string {
     return this.name;
   }
@@ -35,7 +40,15 @@ class Person implements PersonInterface {
 
   public create(): void {
     const personModel: PersonModel = StaticModelFactory.createPersonModel()
-    personModel.saveNew(this.name, this.username, this.email.getValue());
+    personModel.saveNew(
+      this.name,
+      this.username,
+      this.email.getValue()
+    ).then((createdId: string) => {
+      this.id = createdId ?? undefined;
+    }).catch((err: Error) => {
+      throw err;
+    });
   }
 
   private verifyNameConstraints(name: string): void {
